@@ -199,6 +199,50 @@ In HEXAPURR's lore, each part of the cat holds the mind that drew it:
 
 Exact model versions were not recorded. Each model received the previous step's image together with the relay rules.
 
+## Run the relay yourself
+
+The repository also contains **the HEXAPURR engine**, a zero-dependency Node.js package that replays the relay as six agents, one per mind. Each agent draws only its own part on a shared ASCII canvas, in the original order. After every step the relay checks that nothing earlier was erased and logs a SHA-256 hash of the frame.
+
+<div align="center">
+<img src="examples/blame.svg" alt="HEXAPURR rendered by the engine, every character coloured by the mind that drew it" width="640">
+
+*`hexapurr blame`: every character coloured by the mind that drew it.*
+</div>
+
+The agents are deterministic programs named after the models. They do not call any AI API. The images in `images/` come from the real models, and the engine is a reproducible tribute to that run.
+
+Requires Node.js 20 or newer. There is nothing to install.
+
+```bash
+node bin/hexapurr.js relay            # replay the six steps one by one
+node bin/hexapurr.js draw             # print the finished cat
+node bin/hexapurr.js draw --step claude   # stop after step 3
+node bin/hexapurr.js blame            # who drew which character
+node bin/hexapurr.js ledger           # per-step audit with frame hashes
+node bin/hexapurr.js minds            # the six minds and what each gave the cat
+node bin/hexapurr.js svg --out cat.svg --blame
+node bin/hexapurr.js draw --seed 42   # same shape, different fur
+```
+
+Sample `ledger` output:
+
+```text
+STEP  MIND    COMPANY    ADDED  RESTYLED  OWNS  SHARE   FRAME SHA-256
+1     Line    OpenAI     116    0         114   10.4%   fc18dc28b771674c
+2     Fur     xAI        470    0         390   35.7%   d117657851291765
+3     Form    Anthropic  81     0         28    2.6%    5332069a573bfec9
+4     Motion  Google     339    91        91    8.3%    0f288b389bc22e6e
+5     Glyph   Meta       5      365       31    2.8%    c3a6c1f3a731f93b
+6     Light   NVIDIA     81     357       438   40.1%   bb9b68a8fccd3fdf
+```
+
+Every mind's nominal share is 16.6%. `SHARE` is what each mind still owns in the final frame, after the minds that came later restyled its work. Every frame the engine produces is checked in under [`examples/`](examples/). For the design and the relay rule, see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+```bash
+npm test              # 37 tests: canvas, geometry, relay rule, renderers, CLI
+npm run examples      # regenerate examples/
+```
+
 ## Verify the images
 
 [`SHA256SUMS.txt`](SHA256SUMS.txt) lists a SHA-256 hash for every image in this repository. To check them:
@@ -232,7 +276,8 @@ Hexapurr/
 ├── README.md
 ├── PROMPT.md                         # original starting prompt + relay template
 ├── SHA256SUMS.txt                    # image checksums
-├── images/
+├── package.json
+├── images/                           # the original relay, drawn by the real models
 │   ├── hexapurr_final.png            # the finished character
 │   ├── hexapurr_evolution.png        # all six steps side by side
 │   └── steps/
@@ -242,8 +287,36 @@ Hexapurr/
 │       ├── step4_gemini_tail.png
 │       ├── step5_metaai_glyphs.png
 │       └── step6_nvidia_final.png
-└── tools/
-    └── make_banner.ps1               # builds hexapurr_evolution.png
+├── bin/
+│   └── hexapurr.js                   # CLI: draw, relay, blame, ledger, minds, svg
+├── src/                              # the HEXAPURR engine
+│   ├── index.js
+│   ├── canvas.js                     # shared canvas + signed pens
+│   ├── anatomy.js                    # the body plan every mind agrees on
+│   ├── geometry.js                   # ellipses, polygons, lines, curves, outlines
+│   ├── texture.js                    # fur language and runes
+│   ├── random.js                     # seeded PRNG
+│   ├── relay.js                      # relay order, relay rule, ledger
+│   ├── minds/
+│   │   ├── mind.js                   # the mind contract
+│   │   ├── line.js                   # 1  OpenAI   the outline
+│   │   ├── fur.js                    # 2  Grok     the fur
+│   │   ├── form.js                   # 3  Claude   the body
+│   │   ├── motion.js                 # 4  Gemini   the tail
+│   │   ├── glyph.js                  # 5  Meta AI  the glyphs
+│   │   └── light.js                  # 6  NVIDIA   the soul
+│   └── render/
+│       ├── terminal.js               # plain / ANSI / blame output
+│       └── svg.js                    # SVG output
+├── test/                             # node:test suite
+├── examples/                         # generated frames, blame view, ledger
+├── scripts/
+│   └── build-examples.js             # regenerates examples/
+├── docs/
+│   └── ARCHITECTURE.md
+├── tools/
+│   └── make_banner.ps1               # builds hexapurr_evolution.png
+└── .github/workflows/ci.yml          # tests on Linux, Windows, macOS
 ```
 
 ---

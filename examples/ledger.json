@@ -1,0 +1,83 @@
+{
+  "seed": 6,
+  "steps": [
+    {
+      "step": 1,
+      "mind": "Line",
+      "company": "OpenAI",
+      "family": "ChatGPT / GPT image",
+      "role": "the outline",
+      "added": 116,
+      "restyled": 0,
+      "filled": 116,
+      "sha256": "fc18dc28b771674c7d862de5926e072386960f7383e3b53148acec9aa72601ea",
+      "owns": 114,
+      "ownedShare": 0.1043956043956044
+    },
+    {
+      "step": 2,
+      "mind": "Fur",
+      "company": "xAI",
+      "family": "Grok",
+      "role": "the fur",
+      "added": 470,
+      "restyled": 0,
+      "filled": 586,
+      "sha256": "d117657851291765dd94c604e7f1b903ddd6a9b98613686def0d2a4826d114bb",
+      "owns": 390,
+      "ownedShare": 0.35714285714285715
+    },
+    {
+      "step": 3,
+      "mind": "Form",
+      "company": "Anthropic",
+      "family": "Claude",
+      "role": "the body",
+      "added": 81,
+      "restyled": 0,
+      "filled": 667,
+      "sha256": "5332069a573bfec918d249edf01322cefa10cac228e5b1c4ae163b3f69194f20",
+      "owns": 28,
+      "ownedShare": 0.02564102564102564
+    },
+    {
+      "step": 4,
+      "mind": "Motion",
+      "company": "Google",
+      "family": "Gemini",
+      "role": "the tail",
+      "added": 339,
+      "restyled": 91,
+      "filled": 1006,
+      "sha256": "0f288b389bc22e6e8de7bc9448cc2c869b40039903b950724b707601bc866174",
+      "owns": 91,
+      "ownedShare": 0.08333333333333333
+    },
+    {
+      "step": 5,
+      "mind": "Glyph",
+      "company": "Meta",
+      "family": "Meta AI",
+      "role": "the glyphs",
+      "added": 5,
+      "restyled": 365,
+      "filled": 1011,
+      "sha256": "c3a6c1f3a731f93be9f38bece65c4e4ef1df96d29cf7910b37415268e54ca085",
+      "owns": 31,
+      "ownedShare": 0.028388278388278388
+    },
+    {
+      "step": 6,
+      "mind": "Light",
+      "company": "NVIDIA",
+      "family": "NVIDIA",
+      "role": "the soul",
+      "added": 81,
+      "restyled": 357,
+      "filled": 1092,
+      "sha256": "bb9b68a8fccd3fdfc1529ff8d13b623753be5079b47df549f22b8ca79eb44e41",
+      "owns": 438,
+      "ownedShare": 0.4010989010989011
+    }
+  ]
+}

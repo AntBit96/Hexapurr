@@ -1,0 +1,35 @@
+{
+  "name": "hexapurr",
+  "version": "1.1.0",
+  "description": "The cat of six minds: a six-agent ASCII relay where each mind draws 16.6% of one cat.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "hexapurr": "bin/hexapurr.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "start": "node bin/hexapurr.js relay",
+    "draw": "node bin/hexapurr.js draw",
+    "blame": "node bin/hexapurr.js blame",
+    "ledger": "node bin/hexapurr.js ledger",
+    "test": "node --test",
+    "examples": "node scripts/build-examples.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "ascii-art",
+    "relay",
+    "multi-agent",
+    "cat",
+    "hexapurr"
+  ]
+}
