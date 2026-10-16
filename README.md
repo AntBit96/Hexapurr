@@ -202,11 +202,6 @@ Exact model versions were not recorded. Each model received the previous step's 
 ## Run the relay yourself
 
 The repository also contains **the HEXAPURR engine**, a zero-dependency Node.js package that replays the relay as six agents, one per mind. Each agent draws only its own part on a shared ASCII canvas, in the original order. After every step the relay checks that nothing earlier was erased and logs a SHA-256 hash of the frame.
-
-<div align="center">
-<img src="examples/blame.svg" alt="HEXAPURR rendered by the engine, every character coloured by the mind that drew it" width="640">
-
-*`hexapurr blame`: every character coloured by the mind that drew it.*
 </div>
 
 The agents are deterministic programs named after the models. They do not call any AI API. The images in `images/` come from the real models, and the engine is a reproducible tribute to that run.
